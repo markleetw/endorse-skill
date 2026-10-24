@@ -34,7 +34,7 @@ Ask follow-up questions when any of these would otherwise weaken the recommendat
 
 Do **not** keep interviewing to fill every category or collect metrics that do not exist. If evidence is sufficient, write. If facts are limited, narrow claims rather than inventing detail.
 
-## Mandatory editorial gate (Fiti Standard)
+## Mandatory editorial quality review
 
 Before delivery, check and revise until all hold:
 
