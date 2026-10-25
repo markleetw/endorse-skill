@@ -16,34 +16,28 @@ Endorse 是一份不綁定特定 AI 平台的 Agent Skill，協助你寫出可�
 - **準確區分貢獻與成果：** 不把團隊產出寫成個人功勞，也不編造業務指標與成效。
 - **內建兩輪審稿：** 先審查事實與歸因，再精修敘事、語氣、結構及精簡度；不必另外提醒 AI「review / refine」。
 
-## 安裝方式
+## 安裝為 Agent Skill
 
-Endorse **只是一份 Markdown Skill，不是可執行的軟體**，不需要 API Key、套件管理工具或外部整合。實際安裝方式依 AI 助理而異。
+Endorse 採用標準 **Agent Skills** 目錄結構：以 `endorse` 為資料夾名稱，裡面放一份具有 YAML frontmatter 的 `SKILL.md`。不需安裝腳本、相依套件、API Key 或外部服務。
 
-### 方式 A：ChatGPT 專案
-
-1. 下載 [SKILL.md](SKILL.md)，或取得 [v1.0 安裝包](https://github.com/markleetw/endorse-skill/releases)。
-2. 開啟你想用來撰寫推薦文的 ChatGPT 專案。
-3. 把 `SKILL.md` 加入專案的「參考資料／檔案」。
-4. 在**該專案內開新對話**，輸入：「我要寫一篇 LinkedIn 推薦文，請依照專案參考資料的 SKILL.md 執行。」
-
-這是透過 ChatGPT 專案參考檔案提供指示，**不代表安裝原生 ChatGPT 工具，也無法保證每次都自動執行**。後續更新 Skill 時，記得替換專案裡的舊檔案。
-
-### 方式 B：支援 Agent Skills 的 AI 助理
-
-將 `SKILL.md` 放到你的 AI 助理支援的 Skill 目錄，例如：
+下載 Release 裡的 `endorse-v1.0.0.zip`，或自行將 [SKILL.md](SKILL.md) 放進 `endorse/` 資料夾。請把**整個 Skill 資料夾**放到 AI Agent 支援的 Skills 目錄，而非安裝 README。
 
 ```text
-<你的 Agent Skills 目錄>/
-  endorse/
-    SKILL.md
+endorse/
+└── SKILL.md
 ```
 
-再依該平台的規則啟用或呼叫 Endorse。各平台的目錄、安裝方式及自動載入機制可能不同，請以各平台文件為準。
+**常見的 Skills 安裝位置：**
 
-### 方式 C：一般 AI 聊天／自訂指示
+| Agent | 個人 Skills | 工作目錄／儲存庫 Skills |
+| --- | --- | --- |
+| Claude Code | `~/.claude/skills/endorse/SKILL.md` | `.claude/skills/endorse/SKILL.md` |
+| Codex（CLI／IDE） | `~/.agents/skills/endorse/SKILL.md` | `.agents/skills/endorse/SKILL.md` |
+| 其他支援 Agent Skills 的工具 | 依該 Agent 官方文件指定的位置 | 依該 Agent 官方文件指定的位置 |
 
-直接貼上 [SKILL.md](SKILL.md) 的內容，或將檔案附在聊天中，明確告訴 AI 按照其規則執行即可。不同模型對長篇指示的遵循程度可能不同。
+如果 Agent 提供 Skill installer，也可依其支援的方式指定 GitHub 儲存庫或 Skill 目錄完成安裝。安裝後，可使用 Agent 的 Skill 選擇器或明確呼叫（例如 Claude Code 的 `/endorse`、Codex 的 `$endorse`），也能直接描述需求讓 Agent 依 Skill description 判斷是否套用。能否自動啟用取決於所用工具。
+
+更新時，替換已安裝的 `endorse/SKILL.md` 即可；若 Agent 未偵測到變更，重新啟動後再試。
 
 ## 使用方式
 
