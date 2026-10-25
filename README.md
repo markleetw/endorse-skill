@@ -16,34 +16,28 @@ The result is a publish-ready **English recommendation**, a meaning-equivalent *
 - **Honest attribution.** It separates an individual's proposal or ownership from team execution and verified outcomes. It does not invent results.
 - **Two editorial passes, built in.** Evidence and attribution are checked first; voice, structure, clarity, and concision are refined second. You should not need to request “review and refine.”
 
-## Install
+## Install as an Agent Skill
 
-Endorse is **a Markdown skill, not an executable application**. No API key, package manager, or external integration is required. The installation method depends on your AI assistant.
+Endorse follows the **Agent Skills** folder convention: a directory named `endorse` containing the required `SKILL.md` with YAML frontmatter. It has no scripts, dependencies, API keys, or external services.
 
-### Option A — ChatGPT Project
-
-1. Download **[SKILL.md](SKILL.md)** or get it from the [v1.0 package](https://github.com/markleetw/endorse-skill/releases).
-2. Open the ChatGPT Project where you want to write recommendations.
-3. Add `SKILL.md` to the project's reference files.
-4. In a new conversation within the Project, say: **“I want to write a LinkedIn recommendation. Please follow the attached SKILL.md.”**
-
-This uses the Project's reference-file context; it **does not install a native ChatGPT tool or guarantee automatic execution**. If you update the skill, replace the Project's old reference file.
-
-### Option B — An assistant supporting Agent Skills
-
-Place `SKILL.md` in a skill directory supported by your assistant, for example:
+Download `endorse-v1.0.0.zip` from the release, or copy the [SKILL.md](SKILL.md) file into an `endorse/` folder. Install the **folder**, not the README, in your agent's skills directory.
 
 ```text
-<your-agent-skill-directory>/
-  endorse/
-    SKILL.md
+endorse/
+└── SKILL.md
 ```
 
-Enable or invoke the skill using that assistant's normal mechanism. Directory conventions and discovery behavior vary by platform; consult your assistant's documentation.
+**Common skill directory locations:**
 
-### Option C — Custom instructions / any AI chat
+| Agent | Personal skills | Workspace/repository skills |
+| --- | --- | --- |
+| Claude Code | `~/.claude/skills/endorse/SKILL.md` | `.claude/skills/endorse/SKILL.md` |
+| Codex (CLI / IDE) | `~/.agents/skills/endorse/SKILL.md` | `.agents/skills/endorse/SKILL.md` |
+| Other Agent Skills-compatible agents | Follow the agent's documented skills location | Follow the agent's documented skills location |
 
-Paste the contents of [SKILL.md](SKILL.md) as instructions or attach the file to your conversation, then explicitly ask the assistant to follow it. Large instruction blocks may be handled differently by different models.
+If your agent has a skill installer, point it at the repository or the downloaded skill directory as supported by that installer. After installation, use your agent's skill selector or explicit skill invocation (for example, `/endorse` in Claude Code or `$endorse` in Codex), or describe the task so the agent can match the skill description. Automatic selection varies by agent.
+
+To update, replace the installed `endorse/SKILL.md` with the newer version; restart your agent if it does not detect changes.
 
 ## Use
 
@@ -57,7 +51,7 @@ Start naturally in **English or Chinese**. You do not need to pre-fill a form.
 
 > 我要寫一篇前同事的 LinkedIn 推薦文。他擅長處理複雜的產品決策，也會主動協助其他同事。請依照 SKILL.md 訪談我，只問必要的問題，完成審稿後再交稿。
 
-Endorse will ask focused follow-up questions **only when needed** for credibility or differentiation. Otherwise it will draft, complete its own review, and provide:
+When invoked, Endorse asks focused follow-up questions **only when needed** for credibility or differentiation. Otherwise it will draft, complete its own review, and provide:
 
 1. **English | LinkedIn Recommendation** — ready to copy into LinkedIn.
 2. **繁體中文｜語意對照** — faithful to the English claims and level of certainty.
