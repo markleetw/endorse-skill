@@ -13,7 +13,7 @@ The first stable version of **Endorse**: a Markdown-based, platform-independent 
 - **Two mandatory editorial passes:** Evidence/attribution verification, then narrative refinement, before the first draft is delivered.
 - **Careful calibration:** No invented metrics, results, motivations, or sole ownership of team work.
 - **Bilingual delivery:** Natural English recommendations paired with faithful Traditional Chinese semantic translations.
-- **Portable installation:** ChatGPT Project reference files, agent-skill directories, or ordinary custom instructions.
+- **Standard Agent Skill installation:** Place the `endorse/` folder in a supported agent's skills directory (e.g., Claude Code or Codex).
 
 ### Package contents
 ```text
@@ -25,7 +25,7 @@ endorse/
 ```
 
 ### Install
-See [README.md](README.md#install). For ChatGPT Projects, add `SKILL.md` to the project's reference files and request that the assistant follow it.
+See [README.md](README.md#install-as-an-agent-skill). Extract the archive, then install the `endorse/` folder in your agent's skills directory. Invoke the skill using that agent's standard skill selector or command.
 
 ### Compatibility
 No runtime dependencies; instruction-following quality depends on the model and host platform. Endorse does not post directly to LinkedIn.
@@ -46,10 +46,10 @@ No real-person recommendation examples are included. No open-source license has 
 - **交稿前強制兩輪審稿：** 先檢查證據與成果歸因，再精修文字與敘事；第一次交稿就應完成。
 - **避免誇大：** 不捏造指標、商業成果、動機，也不把團隊貢獻歸為個人獨有。
 - **雙語交付：** 自然英文推薦文搭配忠實的繁體中文語意對照。
-- **可攜式安裝：** 支援透過 ChatGPT 專案參考檔案、Agent Skills 目錄或一般自訂指示使用。
+- **標準 Agent Skill 安裝：** 將 `endorse/` 資料夾放進支援 Skills 的 Agent 目錄，例如 Claude Code 或 Codex。
 
 ### 安裝與使用
-請參考 [繁體中文 README](README.zh-TW.md#安裝方式)。ChatGPT 使用者可將 `SKILL.md` 加入專案參考資料，再於專案內請 AI 依該檔案撰寫推薦文。
+請參考 [繁體中文 README](README.zh-TW.md#安裝為-agent-skill)。解壓縮安裝包後，將 `endorse/` 資料夾放到 Agent 支援的 Skills 目錄，並透過該 Agent 的 Skill 選擇器或指令呼叫。
 
 ### 相容性
 不需執行環境或外部依賴；實際品質取決於所用模型與平台。Endorse 不會自動發布 LinkedIn 內容。
