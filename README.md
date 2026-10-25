@@ -16,48 +16,27 @@ The result is a publish-ready **English recommendation**, a meaning-equivalent *
 - **Honest attribution.** It separates an individual's proposal or ownership from team execution and verified outcomes. It does not invent results.
 - **Two editorial passes, built in.** Evidence and attribution are checked first; voice, structure, clarity, and concision are refined second. You should not need to request “review and refine.”
 
-## Install as an Agent Skill
+## Install
 
-Endorse follows the **Agent Skills** folder convention: a directory named `endorse` containing the required `SKILL.md` with YAML frontmatter. It has no scripts, dependencies, API keys, or external services.
+Download the latest `endorse.zip` from [Releases](https://github.com/markleetw/endorse-skill/releases/latest).
 
-Download `endorse-v1.0.0.zip` from the release, or copy the [SKILL.md](SKILL.md) file into an `endorse/` folder. Install the **folder**, not the README, in your agent's skills directory.
-
-```text
-endorse/
-└── SKILL.md
-```
-
-**Common skill directory locations:**
-
-| Agent | Personal skills | Workspace/repository skills |
-| --- | --- | --- |
-| Claude Code | `~/.claude/skills/endorse/SKILL.md` | `.claude/skills/endorse/SKILL.md` |
-| Codex (CLI / IDE) | `~/.agents/skills/endorse/SKILL.md` | `.agents/skills/endorse/SKILL.md` |
-| Other Agent Skills-compatible agents | Follow the agent's documented skills location | Follow the agent's documented skills location |
-
-If your agent has a skill installer, point it at the repository or the downloaded skill directory as supported by that installer. After installation, use your agent's skill selector or explicit skill invocation (for example, `/endorse` in Claude Code or `$endorse` in Codex), or describe the task so the agent can match the skill description. Automatic selection varies by agent.
-
-To update, replace the installed `endorse/SKILL.md` with the newer version; restart your agent if it does not detect changes.
+| AI Tool | How to install |
+| --- | --- |
+| ChatGPT | Upload the ZIP in a ChatGPT conversation and ask it to install the Skill. |
+| Claude | Settings → Skills → Add → Upload Skill |
 
 ## Use
 
-Start naturally in **English or Chinese**. You do not need to pre-fill a form.
+Start with `/endorse` (if your tool supports skill commands), or simply ask the assistant to use Endorse. For example:
 
-**English example:**
+```text
+/endorse Write a LinkedIn recommendation for my former colleague. I was their manager.
+/endorse 我想幫以前的同事寫 LinkedIn 推薦文，他很擅長產品決策。
+/endorse 請幫我精修這篇舊推薦文，保留事實但讓文字更自然。
+```
 
-> Help me write a LinkedIn recommendation for a former colleague. I was their manager. They handled difficult trade-offs across product, business, and operations. Interview me for any essential details, then draft and refine the recommendation.
+Endorse will ask only for essential missing facts, then independently review and refine the recommendation before delivering English and Traditional Chinese versions.
 
-**繁體中文範例：**
-
-> 我要寫一篇前同事的 LinkedIn 推薦文。他擅長處理複雜的產品決策，也會主動協助其他同事。請依照 SKILL.md 訪談我，只問必要的問題，完成審稿後再交稿。
-
-When invoked, Endorse asks focused follow-up questions **only when needed** for credibility or differentiation. Otherwise it will draft, complete its own review, and provide:
-
-1. **English | LinkedIn Recommendation** — ready to copy into LinkedIn.
-2. **繁體中文｜語意對照** — faithful to the English claims and level of certainty.
-3. **Editorial judgment** — a short note about positioning and any unresolved factual uncertainty.
-
-You retain responsibility for checking whether the account of the person and their work is accurate before publishing.
 
 ## Editorial principles
 
@@ -77,9 +56,9 @@ Avoid placing unpublished or personally identifying recommendation drafts in pub
 
 ## Version and distribution
 
-- **Version:** v1.0.0 (first stable release)
+- **Version:** v1.0.1 (documentation update; skill instructions unchanged)
 - **Source of truth:** [SKILL.md](SKILL.md)
-- **Package:** `endorse-v1.0.0.zip` containing the skill and bilingual documentation
+- **Package:** `endorse.zip` (latest release; skill and bilingual documentation)
 - **Changes:** [Release notes](RELEASE_NOTES.md)
 
 ## License
