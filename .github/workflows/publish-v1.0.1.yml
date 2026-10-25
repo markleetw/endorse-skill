@@ -1,0 +1,55 @@
+name: Publish Endorse v1.0.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-v1.0.1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release sources
+        uses: actions/checkout@v4
+      - name: Validate skill and simplified documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s SKILL.md
+          test -s README.md
+          test -s README.zh-TW.md
+          test -s RELEASE_NOTES.md
+          grep -q '^name: endorse$' SKILL.md
+          grep -q '^## Install$' README.md
+          grep -q '^## 安裝$' README.zh-TW.md
+          grep -q 'endorse.zip' README.md
+          grep -q 'endorse.zip' README.zh-TW.md
+          if grep -Eq 'Install as an Agent Skill|安裝為 Agent Skill|~/.claude/skills|~/.agents/skills' README.md README.zh-TW.md; then
+            echo 'Old installation details are still present'
+            exit 1
+          fi
+      - name: Package standard Agent Skill
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p package/endorse
+          cp SKILL.md README.md README.zh-TW.md RELEASE_NOTES.md package/endorse/
+          (cd package && zip -q -r ../endorse.zip endorse)
+          unzip -t endorse.zip
+      - name: Create tag and publish release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.0.1 >/dev/null 2>&1; then
+            echo 'v1.0.1 already exists; no release was overwritten'
+            exit 0
+          fi
+          gh release create v1.0.1 endorse.zip --target "$GITHUB_SHA" --title "Endorse v1.0.1" --notes "Documentation-only update: simplified bilingual installation and usage following RDD. Download endorse.zip and install via ChatGPT or Claude Skills. SKILL.md remains unchanged. / 文件更新：參考 RDD 簡化中英雙語安裝與使用說明；SKILL.md 不變。"
+          gh release view v1.0.1 --json url,tagName,assets
