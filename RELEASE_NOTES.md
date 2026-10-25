@@ -1,6 +1,17 @@
-# Endorse v1.0.0 — Release Notes / 發布說明
+# Endorse — Release Notes / 發布說明
 
-**Release date / 發布日期:** 2026-10-25
+## v1.0.1 — 2026-10-25
+
+**English:** Documentation-only update. Simplified installation and usage instructions to match the RDD Skill: download `endorse.zip` from Releases; install through ChatGPT or Claude's Skills UI; invoke Endorse with a short request. Removed manual directory-path instructions. **SKILL.md is unchanged.**
+
+**繁體中文：** 僅更新文件。參考 RDD Skill，將安裝方式簡化為「下載 `endorse.zip` → 在 ChatGPT 或 Claude 安裝」，並提供簡短使用範例；移除手動設定資料夾路徑的說明。**SKILL.md 內容不變。**
+
+---
+
+## v1.0.0 — 2026-10-25
+
+**First stable release / 首個正式版本。**
+
 
 ## English
 
