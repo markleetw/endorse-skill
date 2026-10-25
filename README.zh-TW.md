@@ -16,48 +16,27 @@ Endorse 是一份不綁定特定 AI 平台的 Agent Skill，協助你寫出可�
 - **準確區分貢獻與成果：** 不把團隊產出寫成個人功勞，也不編造業務指標與成效。
 - **內建兩輪審稿：** 先審查事實與歸因，再精修敘事、語氣、結構及精簡度；不必另外提醒 AI「review / refine」。
 
-## 安裝為 Agent Skill
+## 安裝
 
-Endorse 採用標準 **Agent Skills** 目錄結構：以 `endorse` 為資料夾名稱，裡面放一份具有 YAML frontmatter 的 `SKILL.md`。不需安裝腳本、相依套件、API Key 或外部服務。
+到 [Releases](https://github.com/markleetw/endorse-skill/releases/latest) 下載最新的 `endorse.zip`。
 
-下載 Release 裡的 `endorse-v1.0.0.zip`，或自行將 [SKILL.md](SKILL.md) 放進 `endorse/` 資料夾。請把**整個 Skill 資料夾**放到 AI Agent 支援的 Skills 目錄，而非安裝 README。
+| AI Tool | 說明 |
+| --- | --- |
+| ChatGPT | 把 ZIP 丟進 ChatGPT 對話，請它安裝這個 Skill。 |
+| Claude | 設定 → Skills → 新增 → 上傳 Skill |
+
+## 使用
+
+直接輸入 `/endorse`（若工具支援 Skill 指令），或請 AI 使用 Endorse，例如：
 
 ```text
-endorse/
-└── SKILL.md
+/endorse 我要幫前同事寫 LinkedIn 推薦文，我是他的直屬主管。
+/endorse 我想推薦一位很擅長做產品決策的 PM，請先問我必要的問題。
+/endorse 幫我精修這篇舊推薦文，保留原本的事實，但讓文字更自然。
 ```
 
-**常見的 Skills 安裝位置：**
+Endorse 會在資訊不足時詢問必要的問題，並在第一次交稿前自行完成審稿，提供英文推薦文與繁體中文語意對照。
 
-| Agent | 個人 Skills | 工作目錄／儲存庫 Skills |
-| --- | --- | --- |
-| Claude Code | `~/.claude/skills/endorse/SKILL.md` | `.claude/skills/endorse/SKILL.md` |
-| Codex（CLI／IDE） | `~/.agents/skills/endorse/SKILL.md` | `.agents/skills/endorse/SKILL.md` |
-| 其他支援 Agent Skills 的工具 | 依該 Agent 官方文件指定的位置 | 依該 Agent 官方文件指定的位置 |
-
-如果 Agent 提供 Skill installer，也可依其支援的方式指定 GitHub 儲存庫或 Skill 目錄完成安裝。安裝後，可使用 Agent 的 Skill 選擇器或明確呼叫（例如 Claude Code 的 `/endorse`、Codex 的 `$endorse`），也能直接描述需求讓 Agent 依 Skill description 判斷是否套用。能否自動啟用取決於所用工具。
-
-更新時，替換已安裝的 `endorse/SKILL.md` 即可；若 Agent 未偵測到變更，重新啟動後再試。
-
-## 使用方式
-
-直接用**中文或英文**描述需求即可，不必先填問卷。
-
-**中文範例：**
-
-> 我要寫一篇前同事的 LinkedIn 推薦文。他擅長處理複雜的產品決策，也會主動協助其他同事。請依照 SKILL.md 訪談我，只問必要的問題，完成審稿後再交稿。
-
-**English example:**
-
-> Help me write a LinkedIn recommendation for a former colleague. I was their manager. They handled difficult trade-offs across product, business, and operations. Interview me for any essential details, then draft and refine the recommendation.
-
-Endorse 只會在影響真實性或人物特色時提出必要問題。資訊足夠後，它會自行完成草稿、審稿與精修，交付：
-
-1. **English | LinkedIn Recommendation**：可複製到 LinkedIn 的英文正式版。
-2. **繁體中文｜語意對照**：完整保留英文版本的事實、語氣與不確定性。
-3. **Editorial judgment**：簡要說明核心定位，以及是否仍有事實待確認。
-
-發布前，仍應由推薦人確認涉及人物與經歷的事實準確無誤。
 
 ## 寫作原則
 
@@ -77,9 +56,9 @@ Endorse 不會虛構成就、指標、個人動機、獨自負責的範圍或業
 
 ## 版本與下載
 
-- **版本：** v1.0.0（首個正式穩定版本）
+- **版本：** v1.0.1（僅簡化安裝文件；Skill 規則不變）
 - **正式規則：** [SKILL.md](SKILL.md)
-- **安裝包：** `endorse-v1.0.0.zip`，包含 Skill 與中英雙語文件
+- **安裝包：** `endorse.zip`（最新 Release，包含 Skill 與中英雙語文件）
 - **更新摘要：** [發布說明](RELEASE_NOTES.md)
 
 ## 授權
