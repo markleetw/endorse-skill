@@ -25,7 +25,7 @@ endorse/
 ```
 
 ### Install
-See [README.md](README.md#install-as-an-agent-skill). Extract the archive, then install the `endorse/` folder in your agent's skills directory. Invoke the skill using that agent's standard skill selector or command.
+See [README.md](https://github.com/markleetw/endorse-skill/blob/v1.0.0/README.md#install-as-an-agent-skill). Extract the archive, then install the `endorse/` folder in your agent's skills directory. Invoke the skill using that agent's standard skill selector or command.
 
 ### Compatibility
 No runtime dependencies; instruction-following quality depends on the model and host platform. Endorse does not post directly to LinkedIn.
@@ -49,7 +49,7 @@ No real-person recommendation examples are included. No open-source license has 
 - **標準 Agent Skill 安裝：** 將 `endorse/` 資料夾放進支援 Skills 的 Agent 目錄，例如 Claude Code 或 Codex。
 
 ### 安裝與使用
-請參考 [繁體中文 README](README.zh-TW.md#安裝為-agent-skill)。解壓縮安裝包後，將 `endorse/` 資料夾放到 Agent 支援的 Skills 目錄，並透過該 Agent 的 Skill 選擇器或指令呼叫。
+請參考 [繁體中文 README](https://github.com/markleetw/endorse-skill/blob/v1.0.0/README.zh-TW.md#安裝為-agent-skill)。解壓縮安裝包後，將 `endorse/` 資料夾放到 Agent 支援的 Skills 目錄，並透過該 Agent 的 Skill 選擇器或指令呼叫。
 
 ### 相容性
 不需執行環境或外部依賴；實際品質取決於所用模型與平台。Endorse 不會自動發布 LinkedIn 內容。
