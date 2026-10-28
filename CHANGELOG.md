@@ -8,7 +8,7 @@ All notable changes are recorded here. The source on `main` is under development
 - Add a fictional editorial regression suite and scoring rubric.
 - Rewrite English and Taiwan Traditional Chinese documentation; clarify host-specific installation and limitations.
 - Prepare reusable validation and release workflows.
-- Licensing decision pending; no new release has been published.
+- Adopt the MIT License; no new release has been published yet.
 
 ## [1.0.1] — 2026-10-25
 
