@@ -42,6 +42,7 @@ jobs:
           set -euo pipefail
           [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "Invalid version"; exit 1; }
           test -s LICENSE || { echo "Choose a license before claiming an open-source release"; exit 1; }
+          test -s "releases/$VERSION.md" || { echo "Missing version-specific release notes"; exit 1; }
           python scripts/validate.py
           if git rev-parse "refs/tags/$VERSION" >/dev/null 2>&1; then
             echo "Refusing to overwrite existing tag $VERSION"
@@ -70,5 +71,4 @@ jobs:
           gh release create "$VERSION" endorse.zip SHA256SUMS \
             --target "$GITHUB_SHA" \
             --title "Endorse $VERSION" \
-            --notes-file RELEASE_NOTES.md \
-            --verify-tag=false
+            --notes-file "releases/$VERSION.md"
