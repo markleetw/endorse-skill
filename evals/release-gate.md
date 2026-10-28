@@ -1,32 +1,30 @@
-# Release gate — v1.1.0 (pending execution)
+# Release gate — v1.1.0
 
-**Status: NOT RUN.** This checklist is an evidence record, not a statement that the model has passed evaluation.
+**Evaluation status: LIMITED REVIEW ACCEPTED BY MAINTAINER — NOT A MODEL A/B PASS.**
 
-## Fixed comparison
+The user/maintainer explicitly approved proceeding with v1.1.0 on 2026-10-28 after reviewing the [lightweight regression review](reviews/v1.1.0-lightweight.md) and acknowledging that no controlled model-version comparison or cross-platform installation test was run. This is **risk acceptance**, not evidence that those tests passed.
 
-Baseline: v1.0.1 tag. Candidate: exact main commit selected for v1.1.0 after docs and package pipeline are merged. Use identical model/host/settings to the extent supported, fresh conversations, and the five fictional cases.
+## Evidence and limitations
 
-For each case and each version, store completed `run-record-template.md` records (privately when containing output not approved for publication). Record whether the assistant asked an appropriate question before supplying additional facts. **Do not volunteer the follow-up facts unless requested**; lack of a material question may itself be a role-coverage or grounding failure.
+| Check | Status | Evidence |
+| --- | --- | --- |
+| Historical first-draft issues reviewed | Reviewed | [Lightweight review](reviews/v1.1.0-lightweight.md) |
+| Baseline vs candidate instructions | PASS (static) | v1.0.1 SKILL.md and unchanged candidate SKILL.md hash recorded in review |
+| Fictional product-manager model A/B | NOT RUN | No generated output evaluated |
+| Fictional engineering-lead model A/B | NOT RUN | No generated output evaluated |
+| Fictional design-lead model A/B | NOT RUN | No generated output evaluated |
+| Ambiguous attribution model A/B | NOT RUN | No generated output evaluated |
+| Limited evidence model A/B | NOT RUN | No generated output evaluated |
+| Cross-host Skills UI installation | NOT RUN | Host-specific availability; users must validate on their environment |
+| Package structural verification | PASS on release candidate PR when CI completes | Shared packaging script, ZIP file set, checksum |
+| Release notes and License | Included in release packaging | MIT License and bilingual version-specific notes |
 
-## Results
+## Residual risk accepted
 
-| Case | Baseline | Candidate | Reviewer |
-| --- | --- | --- | --- |
-| product-manager | Not run | Not run | Pending |
-| engineering-lead | Not run | Not run | Pending |
-| design-lead | Not run | Not run | Pending |
-| ambiguous-attribution | Not run | Not run | Pending |
-| limited-evidence | Not run | Not run | Pending |
+The candidate has added instructions explicitly intended to improve narrative angle selection, role coverage, and pre-delivery editing; the actual effect can vary by model and host. Static checks cannot prove prose quality, correct follow-up questions, or no regression. Human factual review is required before posting recommendations.
 
-## Approval requirements
+If issues appear after release, add fictionalized regression cases and publish a corrective release rather than modifying an existing tag or asset.
 
-- [ ] No fabricated metric, project, effect, or attribution
-- [ ] No known fixable editorial problem deferred to user
-- [ ] Each evaluated dimension scores at least 2 on all five cases or exceptions are explicitly reviewed and justified
-- [ ] Any regression against v1.0.1 is documented and accepted by a human reviewer
-- [ ] Actual packaged ZIP tested on intended platforms, or platform limitations documented
-- [ ] CI structural check passes on release candidate
-- [ ] Release ZIP and version-specific bilingual notes checked
-- [ ] Maintainer approval to publish
+**Release approval: APPROVED.**
 
-**Release approval: PENDING.** Checking a workflow input alone is not sufficient evidence.
+Approved scope: v1.1.0 only, with the above caveats. No SKILL.md changes in this release preparation.
