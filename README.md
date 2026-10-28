@@ -78,7 +78,7 @@ Do not publish identifiable colleagues' drafts, private performance discussions,
 - [How to contribute](CONTRIBUTING.md) · [Security reporting](SECURITY.md)
 - [Changelog](CHANGELOG.md) · [GitHub Releases](https://github.com/markleetw/endorse-skill/releases)
 - **Release ZIP:** a versioned snapshot. **`main`:** ongoing development, which may contain newer instructions than the latest ZIP.
-- **Current published version:** [v1.0.1](https://github.com/markleetw/endorse-skill/releases/tag/v1.0.1). A future v1.1.0 is planned but has **not** been released.
+- **Release candidate:** v1.1.0, approved for publication; the latest published version is available from [GitHub Releases](https://github.com/markleetw/endorse-skill/releases/latest).
 
 ## License
 
