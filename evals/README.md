@@ -23,6 +23,12 @@ Endorse is a writing skill. Its quality cannot be established by checking whethe
 
 All characters and organizations below are fictional. These cases represent evaluation *scenarios*, not reference recommendations or expected prose templates.
 
+## Run records and release approval
+
+Use [run-record-template.md](run-record-template.md) to document each case and model version, and [release-gate.md](release-gate.md) to compare the pinned baseline and release candidate. The release gate is **not approved** until actual model-generated first drafts have been independently evaluated and the maintainer has recorded explicit approval. Do not simply tick a workflow input.
+
+**Important:** The `Facts available on follow-up` are not shown up front. Only disclose specific facts when the assistant asks about them. An omitted relevant question is part of what the test evaluates; never auto-fill missing facts or mark an unrun case as passed.
+
 ## Limitations
 
 Passing these cases does not prove model-independent reliability. Host support, context, model behavior, and skill installation can change. Structural CI is separate from this semantic evaluation and **must not be represented as writing-quality validation**.

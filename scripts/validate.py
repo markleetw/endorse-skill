@@ -5,6 +5,7 @@ import re
 import sys
 import zipfile
 import tempfile
+from package import build
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -42,13 +43,9 @@ def check():
                 fail(f"{case.name}: missing section {heading}")
     with tempfile.TemporaryDirectory() as directory:
         archive = Path(directory) / "endorse.zip"
-        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
-            for file in ["SKILL.md", "README.md", "README.zh-TW.md", "RELEASE_NOTES.md"]:
-                z.write(ROOT / file, f"endorse/{file}")
-        with zipfile.ZipFile(archive) as z:
-            if z.testzip() is not None:
-                fail("Corrupt release ZIP")
-            assert "endorse/SKILL.md" in z.namelist()
+        digest = build(archive, ROOT / "releases/v1.1.0.md")
+        if len(digest) != 64:
+            fail("Missing package SHA-256 digest")
     print("PASS: frontmatter, docs, links, cases and ZIP layout (structural only)")
 
 if __name__ == "__main__":
