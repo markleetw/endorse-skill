@@ -21,7 +21,7 @@ def check():
         fail("SKILL.md: invalid name")
     if not re.search(r"(?m)^description: .{30,}$", front):
         fail("SKILL.md: missing meaningful description")
-    for p in ["README.md", "README.zh-TW.md", "RELEASE_NOTES.md",
+    for p in ["README.md", "README.zh-TW.md",
               "CONTRIBUTING.md", "SECURITY.md", "CHANGELOG.md",
               "evals/README.md", "evals/rubric.md"]:
         if not (ROOT / p).is_file() or not (ROOT / p).read_text(encoding="utf-8").strip():
@@ -41,11 +41,20 @@ def check():
         for heading in ["## Input", "## Facts available on follow-up", "## Evaluator expectations"]:
             if heading not in content:
                 fail(f"{case.name}: missing section {heading}")
+    notes = sorted((ROOT / "releases").glob("v*.md"))
+    if not notes:
+        fail("No version-specific release notes found")
     with tempfile.TemporaryDirectory() as directory:
-        archive = Path(directory) / "endorse.zip"
-        digest = build(archive, ROOT / "releases/v1.1.0.md")
-        if len(digest) != 64:
-            fail("Missing package SHA-256 digest")
+        for version_notes in notes:
+            if not re.fullmatch(r"v[0-9]+\\.[0-9]+\\.[0-9]+\\.md", version_notes.name):
+                fail(f"Unexpected release notes filename: {version_notes.name}")
+            archive = Path(directory) / f"{version_notes.stem}.zip"
+            digest = build(archive, version_notes)
+            if len(digest) != 64:
+                fail("Missing package SHA-256 digest")
+    for release_gate in (ROOT / "evals/gates").glob("v*.md"):
+        if not re.fullmatch(r"v[0-9]+\\.[0-9]+\\.[0-9]+\\.md", release_gate.name):
+            fail(f"Unexpected release gate filename: {release_gate.name}")
     print("PASS: frontmatter, docs, links, cases and ZIP layout (structural only)")
 
 if __name__ == "__main__":
