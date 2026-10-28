@@ -1,66 +1,85 @@
 # Endorse
 
-**有根據、有個人特色的 LinkedIn 推薦文。**
+**有根據、有個人特色，也真正像你會寫的 LinkedIn 推薦文。**
 
-**繁體中文** · [English](README.md) · [Skill 完整規則](SKILL.md) · [v1.0 發布說明](RELEASE_NOTES.md)
+**繁體中文（台灣）** · [English](README.md) · [Skill 完整規則](SKILL.md) · [下載版本](https://github.com/markleetw/endorse-skill/releases)
 
-Endorse 是一份不綁定特定 AI 平台的 Agent Skill，協助你寫出可信、有辨識度且自然的 LinkedIn 推薦文。它只在關鍵資訊不足時進行訪談，從推薦人的親身觀察找出值得強調的能力，並在**第一次交稿前自行完成審稿與精修**。
+Endorse 是一份以 Markdown 編寫、不綁定特定 AI 平台的 Agent Skill。它從你親身經歷的合作與決策出發，只在關鍵資訊不足時追問，並在**第一次交稿前自行完成事實檢查與文字精修**。
 
-最終交付包含**可直接發布的英文推薦文**、**繁體中文語意對照**，以及簡短的編輯判斷。
+你會拿到一篇**可供確認後發布的英文 LinkedIn 推薦文**、自然的繁體中文語意對照，以及簡短的編輯判斷。最終事實確認與是否發布，仍由推薦人決定。
 
-## Endorse 的特色
+## 為什麼用 Endorse？
 
-- **具體而不空泛：** 用真實觀察、決策與個人貢獻證明能力，不只是堆疊形容詞。
-- **不套用制式開頭：** 不預設從「I worked with…」或「I managed…」開始，而是優先呈現人物特有的觀察。
-- **有洞察力的結尾：** 呈現推薦人為何信任或欣賞對方，避免在結尾重複列出優點。
-- **準確區分貢獻與成果：** 不把團隊產出寫成個人功勞，也不編造業務指標與成效。
-- **內建兩輪審稿：** 先審查事實與歸因，再精修敘事、語氣、結構及精簡度；不必另外提醒 AI「review / refine」。
+- **具體，而不是堆疊形容詞：** 讓真實的行為、判斷和成果支持每個稱讚。
+- **呈現你獨有的觀察：** 找出你與對方合作後，最有資格說出的專業洞察，而不是套用金句。
+- **不誇大功勞：** 分清楚個人提案、主管核准、團隊執行與實際可證實的結果。
+- **初稿就完成精修：** 先檢查事實與歸因，再重新審視整篇敘事；可以直接修正的問題，不留給你做第二輪。
+- **少問，但問在重點上：** 只有缺少的資訊可能大幅改變推薦文，才補問關鍵問題。
 
-## 安裝
+## 快速開始
 
-到 [Releases](https://github.com/markleetw/endorse-skill/releases/latest) 下載最新的 `endorse.zip`。
+1. 從 [最新 Release](https://github.com/markleetw/endorse-skill/releases/latest) 下載 **`endorse.zip`**。
+2. 依使用的平台安裝：
 
-| AI Tool | 說明 |
+| 平台 | 安裝方式 |
 | --- | --- |
-| ChatGPT | 把 ZIP 丟進 ChatGPT 對話，請它安裝這個 Skill。 |
-| Claude | 設定 → Skills → 新增 → 上傳 Skill |
+| **ChatGPT**（符合資格的工作區） | **外掛程式 → 技能（Skills）→ 建立 → 從電腦上傳**。是否開放取決於方案與工作區設定。 |
+| **Claude**（支援 Skills 的環境） | 開啟 Claude 設定中的 Skills 功能並上傳 Skill；介面名稱依版本及方案而異。 |
+| **其他相容 Agent** | 依各平台的官方 Skills 安裝說明操作。 |
 
-## 使用
+ChatGPT 的官方步驟請參考 [ChatGPT 中的技能](https://help.openai.com/zh-hant/articles/20001066-skills-in-chatgpt)。**把 ZIP 當作一般聊天附件上傳，不等於已正式安裝 Skill。**
 
-直接輸入 `/endorse`（若工具支援 Skill 指令），或請 AI 使用 Endorse，例如：
+3. 告訴 AI 要使用 Endorse。支援技能指令的平台也可以嘗試輸入 `/endorse`：
 
 ```text
-/endorse 我要幫前同事寫 LinkedIn 推薦文，我是他的直屬主管。
-/endorse 我想推薦一位很擅長做產品決策的 PM，請先問我必要的問題。
-/endorse 幫我精修這篇舊推薦文，保留原本的事實，但讓文字更自然。
+/endorse 我要推薦以前帶過的 PM，請只問我必要的問題。
+/endorse 我想寫一位工程主管的 LinkedIn 推薦文。
+/endorse 請精修這篇推薦文，確認沒有誇大他的個人貢獻。
 ```
 
-Endorse 會在資訊不足時詢問必要的問題，並在第一次交稿前自行完成審稿，提供英文推薦文與繁體中文語意對照。
+實際呼叫方式依平台而異。Endorse **不會自動登入或發布到 LinkedIn**。
 
+## Endorse 如何運作
 
-## 寫作原則
+1. **釐清合作關係：** 你和對方的角色、合作經驗及第一手觀察。
+2. **找出有證據的特色：** 避免只用能力標籤；必要時確認是否遺漏重要的管理或專業貢獻。
+3. **選擇最有說服力的角度：** 在內部比較敘事方向，寫成連貫的人物形象。
+4. **交稿前兩輪審稿：** 先檢查事實，再精修開頭、結尾、段落與重複內容。
+5. **提供雙語結果：** 英文推薦文、忠實的繁中語意對照，以及簡短編輯說明。
 
-**證據優先於形容詞；個人特色優先於模板；專業判斷優先於一味附和。**
+完整執行規則請參考 [SKILL.md](SKILL.md)。
 
-開頭不靠公式，正文展現當事人**實際做了什麼、為什麼重要**，結尾則提煉推薦人特有的觀察。內容的資訊密度與可信度，優先於固定字數。
+## 一個簡短的虛構例子
 
-Endorse 不會虛構成就、指標、個人動機、獨自負責的範圍或業務成效，也會將內部專案轉換成外部讀者能理解的脈絡。
+以下人物和公司完全是**虛構**的，僅示範怎麼從空泛稱讚找到可信的個人觀察，不是固定寫作模板。
 
-## 適用範圍與隱私
+**空泛的說法：**「Sam 是很厲害的 PM，也很會團隊合作。」
 
-**包含：** LinkedIn 書面推薦文、適應式訪談、事實與敘事審稿、英文推薦文及繁體中文對照。
+**更有價值的證據：**「團隊對一個探索功能還沒有共識時，Sam 同時考慮使用者回饋和工程限制，提出範圍較小的實驗，協助大家做出決策。優先順序由我審核，實驗由團隊共同完成。」
 
-**不包含：** LinkedIn 技能背書點選、正式推薦信、背景查核、LinkedIn 自動發布、外部研究或第三方整合。
+**可能寫成的英文片段：**
 
-未經當事人同意，請勿將未公開的推薦文或可識別個人身分的案例提交到公開 Issue、Commit 或示範文件。這份公開儲存庫**不包含真實人物的推薦文案例**。
+> What I appreciated about working with Sam was the way they made uncertain product decisions easier to discuss. When our team had no agreed solution for a discovery problem, Sam helped us compare user needs with engineering constraints and proposed a smaller experiment we could actually learn from.
 
-## 版本與下載
+這樣既呈現 Sam 的貢獻，也不會擅自宣稱實驗帶來多少成長、或整個功能都是 Sam 一個人完成的。
 
-- **版本：** v1.0.1（僅簡化安裝文件；Skill 規則不變）
-- **正式規則：** [SKILL.md](SKILL.md)
-- **安裝包：** `endorse.zip`（最新 Release，包含 Skill 與中英雙語文件）
-- **更新摘要：** [發布說明](RELEASE_NOTES.md)
+## 相容性與使用限制
+
+Endorse 是純文字的 Agent Skill，不需要額外執行環境，也不會連接外部服務或自動發布內容。不同 AI 平台、模型、權限與對話脈絡，都可能影響實際效果。即使檔案格式正確，也不代表每個平台的輸出品質都相同。**發布前請由推薦人確認內容正確。**
+
+## 品質驗證與隱私
+
+本專案提供[虛構案例回歸測試](evals/README.md)與[評分規準](evals/rubric.md)，檢查事實、成果歸因、人物辨識度、管理職責、文字精修與翻譯一致性。這些測試素材**不代表目前已完成跨模型驗證**。
+
+請勿在公開 Issue、PR 或 Commit 中張貼真實同事的績效資訊、未公開專案或可識別個人身分的推薦文。
+
+## 參與貢獻與版本
+
+- [貢獻指南（英文）](CONTRIBUTING.md) · [安全性回報（英文）](SECURITY.md)
+- [更新紀錄](CHANGELOG.md) · [GitHub Releases](https://github.com/markleetw/endorse-skill/releases)
+- **Release ZIP** 是固定版本；**`main`** 是持續開發版本，內容可能比最新 ZIP 新。
+- **目前正式發布：** [v1.0.1](https://github.com/markleetw/endorse-skill/releases/tag/v1.0.1)。v1.1.0 規劃中，**尚未發布**。
 
 ## 授權
 
-本儲存庫目前未提供開放原始碼授權條款。公開可見不代表允許任意修改、重新散布或再授權；若需要超出 GitHub 平台條款所允許的使用權限，請聯繫儲存庫擁有者。
+本專案尚未選定開源授權條款。GitHub 公開可見不等於允許任意修改、重製、散布或再授權；在授權確定前，仍適用既有著作權限制。
