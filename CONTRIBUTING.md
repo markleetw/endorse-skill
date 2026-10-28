@@ -23,4 +23,4 @@ Use a descriptive title, explain expected behavior and tradeoffs, link related i
 
 ## Licensing status
 
-The repository has not yet adopted an open-source license. Public pull requests do not automatically grant third parties a license to reuse this repository; please check the current [README](README.md) and discuss substantial contributions with the maintainer until licensing is resolved.
+Endorse is licensed under the [MIT License](LICENSE). By submitting a contribution, you agree to make your contribution available under the repository's MIT License; only submit material you have the rights to contribute.
