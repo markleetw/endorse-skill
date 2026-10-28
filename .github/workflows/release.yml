@@ -37,17 +37,47 @@ jobs:
           python-version: '3.12'
       - name: Validate release prerequisites and structure
         env:
+          GH_TOKEN: ${{ github.token }}
           VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
           [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "Invalid version"; exit 1; }
           test -s LICENSE || { echo "Choose a license before claiming an open-source release"; exit 1; }
           test -s "releases/$VERSION.md" || { echo "Missing version-specific release notes"; exit 1; }
+          test "$GITHUB_REF_NAME" = "main" || { echo "Releases must run from main"; exit 1; }
           python scripts/validate.py
-          if git rev-parse "refs/tags/$VERSION" >/dev/null 2>&1; then
-            echo "Refusing to overwrite existing tag $VERSION"
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Refusing to overwrite existing release $VERSION"
             exit 1
           fi
+          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
+            echo "Refusing to overwrite existing remote tag $VERSION"
+            exit 1
+          fi
+          grep -q '^\*\*Release approval: APPROVED\.\*\*
+      - name: Package using the same code as CI
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          python scripts/package.py --version "$VERSION" --output endorse.zip > SHA256SUMS
+          unzip -t endorse.zip
+          sha256sum --check SHA256SUMS
+      - name: Publish immutable version tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release already exists; refusing overwrite"
+            exit 1
+          fi
+          gh release create "$VERSION" endorse.zip SHA256SUMS \
+            --target "$GITHUB_SHA" \
+            --title "Endorse $VERSION" \
+            --notes-file "releases/$VERSION.md"
+ evals/release-gate.md || { echo "Release gate not approved"; exit 1; }
       - name: Package versioned skill
         env:
           VERSION: ${{ inputs.version }}
