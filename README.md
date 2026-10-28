@@ -82,4 +82,4 @@ Do not publish identifiable colleagues' drafts, private performance discussions,
 
 ## License
 
-No open-source license has yet been granted. Public visibility alone does not authorize redistribution, derivative works, or sublicensing. The license is under review; until one is selected, the existing copyright restrictions apply.
+Endorse is released under the [MIT License](LICENSE). You may use, modify, redistribute, and sell copies, provided you retain the copyright and license notice.
