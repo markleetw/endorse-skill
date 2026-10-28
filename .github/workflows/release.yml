@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       evaluations_reviewed:
-        description: 'Confirm that the fixed fictional regression suite was run and reviewed against the prior release'
+        description: 'Confirm fictional regression results were reviewed'
         required: true
         type: boolean
         default: false
@@ -27,7 +27,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Check out release sources
+      - name: Checkout release sources
         uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -35,69 +35,43 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate release prerequisites and structure
+      - name: Validate release prerequisites
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ inputs.version }}
+        shell: bash
         run: |
           set -euo pipefail
           [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "Invalid version"; exit 1; }
-          test -s LICENSE || { echo "Choose a license before claiming an open-source release"; exit 1; }
-          test -s "releases/$VERSION.md" || { echo "Missing version-specific release notes"; exit 1; }
-          test "$GITHUB_REF_NAME" = "main" || { echo "Releases must run from main"; exit 1; }
+          test "$GITHUB_REF_NAME" = "main" || { echo "Run releases from main"; exit 1; }
+          test -s LICENSE
+          test -s "releases/$VERSION.md"
           python scripts/validate.py
           if gh release view "$VERSION" >/dev/null 2>&1; then
-            echo "Refusing to overwrite existing release $VERSION"
-            exit 1
+            echo "Existing release; refusing overwrite"; exit 1
           fi
           if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
-            echo "Refusing to overwrite existing remote tag $VERSION"
-            exit 1
+            echo "Existing remote tag; refusing overwrite"; exit 1
           fi
-          grep -q '^\*\*Release approval: APPROVED\.\*\*
-      - name: Package using the same code as CI
+          grep -Fxq '**Release approval: APPROVED.**' evals/release-gate.md || {
+            echo "Evaluation gate has not been approved"; exit 1;
+          }
+      - name: Package with the same code used by CI
         env:
           VERSION: ${{ inputs.version }}
+        shell: bash
         run: |
           set -euo pipefail
           python scripts/package.py --version "$VERSION" --output endorse.zip > SHA256SUMS
           unzip -t endorse.zip
           sha256sum --check SHA256SUMS
-      - name: Publish immutable version tag and release
+      - name: Publish release without overwriting tags
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ inputs.version }}
+        shell: bash
         run: |
           set -euo pipefail
-          if gh release view "$VERSION" >/dev/null 2>&1; then
-            echo "Release already exists; refusing overwrite"
-            exit 1
-          fi
-          gh release create "$VERSION" endorse.zip SHA256SUMS \
-            --target "$GITHUB_SHA" \
-            --title "Endorse $VERSION" \
-            --notes-file "releases/$VERSION.md"
- evals/release-gate.md || { echo "Release gate not approved"; exit 1; }
-      - name: Package versioned skill
-        env:
-          VERSION: ${{ inputs.version }}
-        run: |
-          set -euo pipefail
-          mkdir -p package/endorse
-          cp SKILL.md README.md README.zh-TW.md RELEASE_NOTES.md LICENSE package/endorse/
-          (cd package && zip -q -r "../endorse.zip" endorse)
-          unzip -t endorse.zip
-          sha256sum endorse.zip > SHA256SUMS
-      - name: Publish immutable version tag and release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ inputs.version }}
-        run: |
-          set -euo pipefail
-          if gh release view "$VERSION" >/dev/null 2>&1; then
-            echo "Release already exists; refusing overwrite"
-            exit 1
-          fi
           gh release create "$VERSION" endorse.zip SHA256SUMS \
             --target "$GITHUB_SHA" \
             --title "Endorse $VERSION" \
