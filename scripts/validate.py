@@ -46,14 +46,14 @@ def check():
         fail("No version-specific release notes found")
     with tempfile.TemporaryDirectory() as directory:
         for version_notes in notes:
-            if not re.fullmatch(r"v[0-9]+\\.[0-9]+\\.[0-9]+\\.md", version_notes.name):
+            if not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+\.md", version_notes.name):
                 fail(f"Unexpected release notes filename: {version_notes.name}")
             archive = Path(directory) / f"{version_notes.stem}.zip"
             digest = build(archive, version_notes)
             if len(digest) != 64:
                 fail("Missing package SHA-256 digest")
     for release_gate in (ROOT / "evals/gates").glob("v*.md"):
-        if not re.fullmatch(r"v[0-9]+\\.[0-9]+\\.[0-9]+\\.md", release_gate.name):
+        if not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+\.md", release_gate.name):
             fail(f"Unexpected release gate filename: {release_gate.name}")
     print("PASS: frontmatter, docs, links, cases and ZIP layout (structural only)")
 
