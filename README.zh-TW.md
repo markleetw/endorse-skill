@@ -78,7 +78,7 @@ Endorse 是純文字的 Agent Skill，不需要額外執行環境，也不會連
 - [貢獻指南（英文）](CONTRIBUTING.md) · [安全性回報（英文）](SECURITY.md)
 - [更新紀錄](CHANGELOG.md) · [GitHub Releases](https://github.com/markleetw/endorse-skill/releases)
 - **Release ZIP** 是固定版本；**`main`** 是持續開發版本，內容可能比最新 ZIP 新。
-- **發行候選版本：** v1.1.0 已核准發布；目前已正式發布的最新版本請以 [GitHub Releases](https://github.com/markleetw/endorse-skill/releases/latest) 為準。
+- **目前正式發布版本：** [v1.1.0](https://github.com/markleetw/endorse-skill/releases/tag/v1.1.0)。
 
 ## 授權
 
