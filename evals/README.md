@@ -25,7 +25,7 @@ All characters and organizations below are fictional. These cases represent eval
 
 ## Run records and release approval
 
-Use [run-record-template.md](run-record-template.md) to document each case and model version, and [release-gate.md](release-gate.md) to compare the pinned baseline and release candidate. The release gate is **not approved** until actual model-generated first drafts have been independently evaluated and the maintainer has recorded explicit approval. Do not simply tick a workflow input.
+Use [run-record-template.md](run-record-template.md) to document each case and model version, and a version-specific gate under [gates/](gates/) (for example, [v1.1.0](gates/v1.1.0.md)) to compare the pinned baseline and release candidate. Release approval must record the evidence actually reviewed and any untested risks explicitly accepted by the maintainer. A limited risk-based review must not be described as a controlled A/B pass. Do not simply tick a workflow input.
 
 **Important:** The `Facts available on follow-up` are not shown up front. Only disclose specific facts when the assistant asks about them. An omitted relevant question is part of what the test evaluates; never auto-fill missing facts or mark an unrun case as passed.
 
