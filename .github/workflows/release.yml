@@ -53,8 +53,11 @@ jobs:
           if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
             echo "Existing remote tag; refusing overwrite"; exit 1
           fi
-          grep -Fxq '**Release approval: APPROVED.**' evals/release-gate.md || {
-            echo "Evaluation gate has not been approved"; exit 1;
+          test -s "evals/gates/$VERSION.md" || {
+            echo "Missing version-specific release gate"; exit 1;
+          }
+          grep -Fxq '**Release approval: APPROVED.**' "evals/gates/$VERSION.md" || {
+            echo "This version has not been approved"; exit 1;
           }
       - name: Package with the same code used by CI
         env:
